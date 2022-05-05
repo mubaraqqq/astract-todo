@@ -1,20 +1,8 @@
-import { useState } from 'react';
-import './App.css';
+import React from 'react';
 import { Paper, Typography, TextField, Box , Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  }
-
+const Signup = () => {
   return (
     <div className="App">
         <Box>
@@ -27,11 +15,11 @@ function App() {
                 <Button color='primary' variant='contained'>Submit</Button>
               </Box>
             </form>
-            <Box><Link to='/signup'><Typography variant='caption'>Create an Account</Typography></Link></Box>
+            <Box><Link to='/'><Typography variant='caption'>Already have an Account?</Typography></Link></Box>
           </Paper>
         </Box>
     </div>
-  );
+  )
 }
 
-export default App;
+export default Signup
