@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
         <Box>
-          <Paper elevation={3} className='sign-in-container' sx={{width: '500px', height: '250px', padding: '1em'}}>
+          <Paper elevation={3} className='sign-in-container' sx={{width: '50vw', height: '250px', padding: '1em'}}>
             <Typography variant='h4'>Sign In</Typography>
             <form action="">
               <Box className='form'>
