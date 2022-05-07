@@ -1,11 +1,18 @@
 import { useState } from 'react';
-import './App.css';
+import '../App.css';
 import { Paper, Typography, TextField, Box , Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import analytics from '../config/firebase-config';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useAuth } from '../contexts/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
 
-function App() {
+function Homepage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
@@ -15,16 +22,30 @@ function App() {
     setPassword(e.target.value);
   }
 
+  const signInUser = async (e) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+      await login(email, password);
+      navigate('/profile')
+    } catch {
+
+    }
+
+    setLoading(false);
+  }
+
   return (
     <div className="App">
         <Box>
           <Paper elevation={3} className='sign-in-container' sx={{width: '50vw', height: '250px', padding: '1em'}}>
             <Typography variant='h4'>Sign In</Typography>
-            <form action="">
+            <form action="" onSubmit={signInUser}>
               <Box className='form'>
                 <Box className='form-input'><TextField label='Email' variant='standard' value={email} onChange={handleEmailChange} /></Box>
                 <Box className='form-input'><TextField label='Password' type='password' variant='standard' value={password} onChange={handlePasswordChange} /></Box>
-                <Button color='primary' variant='contained'>Submit</Button>
+                <Button disabled={loading} onClick={signInUser} color='primary' variant='contained'>Log In</Button>
               </Box>
             </form>
             <Box><Link to='/signup'><Typography variant='caption'>Create an Account</Typography></Link></Box>
@@ -34,4 +55,4 @@ function App() {
   );
 }
 
-export default App;
+export default Homepage;
