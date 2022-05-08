@@ -6,11 +6,12 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { firebaseSignup } from '../auth/signup';
 import { useAuth } from '../contexts/AuthContext';
 import Profile from './Profile';
+import ErrorMessage from './ErrorMessage';
 
 const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [userID, setUserID] = useState('');
+    const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
     const { signup } = useAuth();
@@ -27,13 +28,14 @@ const Signup = () => {
     const signUpUser = async (e) => {
       // firebaseSignup(email, password);
       e.preventDefault();
+      setError('');
 
       try {
         setLoading(true);
         await signup(email, password);
         navigate('/profile')
-      } catch {
-
+      } catch (err) {
+        setError(err.message)
       }
 
       setLoading(false);
@@ -57,28 +59,21 @@ const Signup = () => {
     // console.log(userID);
 
   return (
-    <div>
-      {
-        userID 
-        ? <Profile />
-        : (
-          <div className="App">
-            <Box>
-              <Paper elevation={3} className='sign-in-container' sx={{width: '500px', height: '300px', padding: '1em'}}>
-                <Typography variant='h4'>Create an Account</Typography>
-                <form action="" onSubmit={signUpUser}>
-                  <Box className='form'>
-                    <Box className='form-input'><TextField required label='Email' variant='standard' value={email} onChange={handleEmailChange} /></Box>
-                    <Box className='form-input'><TextField required label='Password' type='password' variant='standard' value={password} onChange={handlePasswordChange} /></Box>
-                    <Button disabled={loading} color='primary' variant='contained' onClick={signUpUser}>Sign Up</Button>
-                  </Box>
-                </form>
-                <Box><Link to='/'><Typography variant='caption'>Already have an Account?</Typography></Link></Box>
-              </Paper>
-            </Box>
-        </div>
-        )
-      }
+      <div className="App">
+        <Box>
+          <Paper elevation={3} className='sign-in-container' sx={{width: '500px', height: '300px', padding: '1em'}}>
+            <Typography variant='h4'>Create an Account</Typography>
+            {error && <ErrorMessage message={error} />}
+            <form action="" onSubmit={signUpUser}>
+              <Box className='form'>
+                <Box className='form-input'><TextField required label='Email' variant='standard' value={email} onChange={handleEmailChange} /></Box>
+                <Box className='form-input'><TextField required label='Password' type='password' variant='standard' value={password} onChange={handlePasswordChange} /></Box>
+                <Button disabled={loading} color='primary' variant='contained' onClick={signUpUser}>Sign Up</Button>
+              </Box>
+            </form>
+            <Box><Link to='/'><Typography variant='caption'>Already have an Account?</Typography></Link></Box>
+          </Paper>
+        </Box>
     </div>
   )
 }
