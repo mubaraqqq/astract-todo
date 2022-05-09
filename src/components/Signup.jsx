@@ -5,7 +5,7 @@ import analytics from '../config/firebase-config';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { firebaseSignup } from '../auth/signup';
 import { useAuth } from '../contexts/AuthContext';
-import Profile from './Profile';
+import User from './User';
 import ErrorMessage from './ErrorMessage';
 
 const Signup = () => {
@@ -33,7 +33,7 @@ const Signup = () => {
       try {
         setLoading(true);
         await signup(email, password);
-        navigate('/profile')
+        navigate('/user')
       } catch (err) {
         setError(err.message)
       }

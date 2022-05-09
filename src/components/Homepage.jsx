@@ -31,7 +31,7 @@ function Homepage() {
     try {
       setLoading(true);
       await login(email, password);
-      navigate('/profile')
+      navigate('/user')
     } catch (err) {
       setError(err.message)
     }

@@ -3,7 +3,8 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Homepage from './components/Homepage';
 import Signup from './components/Signup';
-import Profile from './components/Profile';
+import User from './components/User';
+import RequireAuth from './components/RequireAuth';
 import { AuthProvider } from './contexts/AuthContext';
 
 const App = () => {
@@ -11,9 +12,9 @@ const App = () => {
     <AuthProvider>
       <div>
           <Routes>
-            <Route exact path='/' element={<Homepage />} />
+            <Route index path='/' element={<Homepage />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/user/*' element={ <RequireAuth><User /></RequireAuth> } />
           </Routes>
       </div>
     </AuthProvider>
