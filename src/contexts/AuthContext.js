@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { auth, db } from '../config/firebase-config';
 import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc, getDocs } from "firebase/firestore"; 
 
 const AuthContext = createContext();
 
@@ -29,6 +29,10 @@ export const AuthProvider = ({ children }) => {
         return addDoc(collection(db, userId), obj);
     }
 
+    function getTheDocs(userId) {
+        return getDocs(collection(db, userId));
+    }
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             setCurrentUser(user);
@@ -43,7 +47,8 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         signup,
-        addToDoc
+        addToDoc,
+        getTheDocs
     }
 
   return (
