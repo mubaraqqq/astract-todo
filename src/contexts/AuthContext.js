@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     function addToDoc (userId, obj) {
-        return addDoc(collection(db, userId), obj);
+        return addDoc(collection(db, 'todos', userId, 'todo'), obj);
     }
 
     function getTheDocs(userId) {
