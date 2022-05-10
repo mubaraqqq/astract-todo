@@ -32,7 +32,7 @@ const Todos = () => {
       e.preventDefault();
       try {
           setLoading(true);
-          const docRef = await addToDoc(currentUser.uid, {'category': category, 'todoItem': todo, timestamp: Date.now()})
+          const docRef = await addToDoc(currentUser.uid, {'email': currentUser.email, 'category': category, 'todoItem': todo, timestamp: Date.now()})
       } catch (err) {
           console.log(err)
       }
@@ -40,7 +40,6 @@ const Todos = () => {
       setTodo('');
       setCategory('');
   } 
-  console.log(sortedArray, Array.from(new Set(sorted))) 
 
 
   return (

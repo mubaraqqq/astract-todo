@@ -10,7 +10,7 @@ const User = () => {
     <Grid container>
       <Grid item xs={3}>
         <Stack direction='column' spacing={2}>
-          <Link to='/user/profile'>Profile</Link>
+          <Link to='/user/dashboard'>Dashboard</Link>
           <Link to='/user/todos'>Todos</Link>
         </Stack>
       </Grid>
