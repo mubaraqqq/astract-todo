@@ -56,10 +56,11 @@ const Todos = () => {
             <Button disabled={loading} onClick={handleSubmit} variant='contained'>Add Todo</Button>
         </form>
         <Box>
+            <Typography variant='h4'>Todos</Typography>
             <Grid container spacing={2}>
                 {
                     sorted?.map(category => (
-                        <Grid item xs={4} key={category}>
+                        <Grid item xs={6} key={category}>
                             <Card>
                                 <Typography variant='h6'>Category: {category}</Typography>
                                 {
