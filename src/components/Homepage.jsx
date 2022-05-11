@@ -53,6 +53,7 @@ function Homepage() {
               </Box>
             </form>
             <Box><Link to='/signup'><Typography variant='caption'>Create an Account</Typography></Link></Box>
+            <Box><Link to='/admin'><Typography variant='caption'>Admin Dashboard</Typography></Link></Box>
           </Paper>
         </Box>
     </div>
